@@ -9,8 +9,6 @@ class Trainer extends Model
 {
     use HasFactory;
 
-
-
     public function pokemons() {
         return $this->belongsToMany(Pokemon::class);
     }

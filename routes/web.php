@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Service;
+use App\Http\Controllers\TrainerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +17,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/Api',[Service::class, 'consume']);
+
+Route::prefix('/trainer')->group(function(){
+    Route::get('/',[TrainerController::class, 'List']);
+    Route::get('add', [TrainerController::class, 'Add']);
+    Route::post('add', [TrainerController::class, 'TrainerAddAction']);
+    Route::get('delete/{id}', [TrainerController::class, 'Delete']);
+    Route::get('pokemon/{id}', [TrainerController::class, 'TrainerAddPokemon']);
+    Route::post('pokemon/{id}', [TrainerController::class, 'TrainerAddPokemonAction']);
+    
+});
+
