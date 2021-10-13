@@ -10,7 +10,21 @@
 </head>
 <body>
     <section>
-        @yield('content')
+        <div id="main-container" class="container-fluid big-banner d-flex flex-column align-items-center">
+            <div class="d-flex justify-content-center">
+                <div id="title">
+                    <h1>
+                        @yield('title-page')
+                    </h1>
+                </div>
+            </div>
+            <div id="cardItens" class="container-sm d-flex flex-row align-items-start">
+                <div class="container d-flex">
+                    @yield('api')
+                </div>
+            </div>
+            @yield('button')
+        </div>
         
     </section>
     <footer>
