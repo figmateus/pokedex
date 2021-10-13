@@ -1,0 +1,58 @@
+
+#title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3%;
+    
+}
+#title h1 {
+    padding: 3%;
+    background-color: rgb(10, 23, 55);
+    color: #FFF;
+    border-radius: 1%;
+}
+
+#cardItens {
+    min-height: 500px;
+    background-color: rgba(10,23,55,0.8);
+    border-radius: 2%;
+}
+
+#items-list {
+    margin: 3%;
+    padding: 3%;
+    border-radius: 2%;
+}
+.list-group {
+    opacity: 100%;
+}
+.list-group ol {
+    color: #000;
+    opacity: 100%;
+}
+#main-container {
+    background-image: url(../../public/uploads/background.jpg);
+    height: 1000px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 3%;
+}
+.btn {
+    margin: 2%;
+}
+ #add-button {
+     width: 200px;
+     margin: 3%;
+ }
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+@import "node_modules/bootstrap/scss/bootstrap";

@@ -1,0 +1,14 @@
+.container{
+    background-color: salmon;
+    
+}
+
+#main-container{
+    background-image: url('public/uploads/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    
+}
+
+
+
+

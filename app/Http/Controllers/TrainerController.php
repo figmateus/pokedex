@@ -3,14 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Models\Pokemon;
-use App\Http\Models\Trainer;
+use App\Models\Pokemon;
+use App\Models\Trainer;
 
 class TrainerController extends Controller
 {
     
     public function List(){
-        
+
+        $list = Trainer::all();
+
+        return view('admin.list',[
+            'list' => $list
+        ]);
     }
     
     public function Add(){
