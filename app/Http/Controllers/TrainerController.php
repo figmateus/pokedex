@@ -19,7 +19,7 @@ class TrainerController extends Controller
     }
     
     public function Add(){
-
+        return view('admin.add');
     }
 
     public function TrainerAddAction(){

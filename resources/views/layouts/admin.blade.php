@@ -20,12 +20,11 @@
             </div>
             <div id="cardItens" class="container-sm d-flex flex-row align-items-start">
                 <div class="container d-flex">
-                    @yield('api')
+                    @yield('content')
                 </div>
             </div>
             @yield('button')
         </div>
-        
     </section>
     <footer>
         @yield('foot')

@@ -47,6 +47,49 @@
      width: 200px;
      margin: 3%;
  }
+
+ #form-cont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+ }
+#Form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #FFF;
+}
+input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    
+}
+input[type=number] { 
+   -moz-appearance: textfield;
+   appearance: textfield;
+
+}
+#regiao {
+    width: 200px;
+    height: 35px;
+    border-radius: 5%;
+}
+
+#regiao:focus, select:focus {
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+}
+#age:focus, input:focus {
+    border: 0 none;
+    outline: 0;
+}
+.options {
+    display: none;
+    padding: 3px;
+}
+
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 

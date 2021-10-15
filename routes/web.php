@@ -21,8 +21,9 @@ Route::get('/', function () {
 Route::get('/Api',[Service::class, 'consume']);
 
 Route::prefix('/trainer')->group(function(){
-    Route::get('/',[TrainerController::class, 'List']);
-    Route::get('add', [TrainerController::class, 'Add']);
+
+    Route::get('/',[TrainerController::class, 'List'])->name('trainer.list');
+    Route::get('add', [TrainerController::class, 'Add'])->name('trainer.add');
     Route::post('add', [TrainerController::class, 'TrainerAddAction']);
     Route::get('delete/{id}', [TrainerController::class, 'Delete']);
     Route::get('pokemon/{id}', [TrainerController::class, 'TrainerAddPokemon']);

@@ -4,7 +4,7 @@
 @section('title-page', 'Lista de treinadores')
 
 
-@section('api')
+@section('content')
 @foreach ($list as $item)
 <div id="items-list" class="container-sm" style="background-color: #889EAF; color: #FFF;">
     {{ $item->name }}<br />
@@ -17,6 +17,6 @@
 @endforeach
 @endsection
 @section('button')
-<a id="add-button" class="btn btn-primary" href="#" role="button">Adicionar Treinador</a>
+<a id="add-button" class="btn btn-primary" href="{{route('trainer.add')}}" role="button">Adicionar Treinador</a>
 @endsection  
 
