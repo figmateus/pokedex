@@ -25,6 +25,8 @@ Route::prefix('/trainer')->group(function(){
     Route::get('/',[TrainerController::class, 'List'])->name('trainer.list');
     Route::get('add', [TrainerController::class, 'Add'])->name('trainer.add');
     Route::post('add', [TrainerController::class, 'TrainerAddAction']);
+    Route::get('edit/{id}',[TrainerController::class, 'Edit'])->name('trainer.edit');
+    Route::post('edit/{id}',[TrainerController::class, 'EditAction']);
     Route::get('delete/{id}', [TrainerController::class, 'Delete']);
     Route::get('pokemon/{id}', [TrainerController::class, 'TrainerAddPokemon']);
     Route::post('pokemon/{id}', [TrainerController::class, 'TrainerAddPokemonAction']);

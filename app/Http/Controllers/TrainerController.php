@@ -22,6 +22,23 @@ class TrainerController extends Controller
         return view('admin.add');
     }
 
+    public function Edit($id){
+
+        $trainer = Trainer::find($id);
+        if($trainer) {
+            return view('admin.edit',[
+                'trainer'  => $trainer
+            ]);
+        }else {
+            return redirect()->route('trainer.list');
+        }
+        
+    }
+
+    public function EditAction(){
+       
+    }
+
     public function TrainerAddAction(){
 
     }
