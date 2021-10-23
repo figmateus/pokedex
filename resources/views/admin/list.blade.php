@@ -10,8 +10,8 @@
     {{ $item->name }}<br />
     Região: {{ $item->region }}<br />
     Idade: {{ $item->age }}<br />
-    <a class="btn btn-primary btn-sm" href="#" role="button">Lista de Pokemons</a>
-    <a class="btn btn-primary btn-sm" href="{{route('trainer.edit',['id'=>$item->id])}}" role="button">Editar Treinador</a>
+    <a class="btn btn-primary btn-sm" href="{{route('trainer.pokeAdd', ['id' => $item->id])}}" role="button">Lista de Pokemons</a>
+    <a class="btn btn-primary btn-sm" href="{{route('trainer.edit', ['id'=>$item->id])}}" role="button">Editar Treinador</a>
     <a class="btn btn-primary btn-sm" href="#" role="button">Deletar Treinador</a>
 </div>
 @endforeach

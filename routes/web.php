@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Service;
 use App\Http\Controllers\TrainerController;
+use App\Http\Controllers\PokemonController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,10 +15,10 @@ use App\Http\Controllers\TrainerController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('trainer');
 });
 
-Route::get('/Api',[Service::class, 'consume']);
+Route::get('/Api',[PokemonController::class, 'service']);
 
 Route::prefix('/trainer')->group(function(){
 
@@ -28,8 +28,8 @@ Route::prefix('/trainer')->group(function(){
     Route::get('edit/{id}',[TrainerController::class, 'Edit'])->name('trainer.edit');
     Route::post('edit/{id}',[TrainerController::class, 'EditAction']);
     Route::get('delete/{id}', [TrainerController::class, 'Delete']);
-    Route::get('pokemon/{id}', [TrainerController::class, 'TrainerAddPokemon']);
-    Route::post('pokemon/{id}', [TrainerController::class, 'TrainerAddPokemonAction']);
+    Route::get('{id}/pokemon', [TrainerController::class, 'TrainerAddPokemon'])->name('trainer.pokeAdd');
+    Route::post('{id}/pokemon', [TrainerController::class, 'TrainerAddPokemonAction']);
     
 });
 

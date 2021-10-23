@@ -22,6 +22,10 @@ class TrainerController extends Controller
         return view('admin.add');
     }
 
+    public function TrainerAddAction(){
+
+    }
+
     public function Edit($id){
 
         $trainer = Trainer::find($id);
@@ -39,16 +43,21 @@ class TrainerController extends Controller
        
     }
 
-    public function TrainerAddAction(){
-
-    }
+   
 
     public function Delete(){
 
     }
 
-    public function TrainerAddPokemon(){
-        
+    public function TrainerAddPokemon($id){
+        $trainer = Trainer::find($id);
+        if($trainer) {
+            return view('admin.pokelist',[
+                'trainer'  => $trainer
+            ]);
+        }else {
+            return redirect()->route('trainer.list');
+        }
     }
 
     public function TrainerAddPokemonAction(){
