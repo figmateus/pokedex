@@ -12,7 +12,7 @@
 </div>
 @endsection
 @section('button')
-<a id="add-button" class="btn btn-primary" href="{{route('trainer.list')}}" role="button">Adicionar Pokemon</a>
+<a id="add-button" class="btn btn-primary" href="{{route('poke.Add',['id' => $trainer->id])}}" role="button">Adicionar Pokemon</a>
 <a id="add-button" class="btn btn-primary" href="{{route('trainer.list')}}" role="button">Voltar</a>
 @endsection  
 

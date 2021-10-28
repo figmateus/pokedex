@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+use App\Models\Trainer;
 use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\PokemonController;
 /*
@@ -21,15 +23,14 @@ Route::get('/', function () {
 Route::get('/Api',[PokemonController::class, 'service']);
 
 Route::prefix('/trainer')->group(function(){
-
     Route::get('/',[TrainerController::class, 'List'])->name('trainer.list');
     Route::get('add', [TrainerController::class, 'Add'])->name('trainer.add');
-    Route::post('add', [TrainerController::class, 'TrainerAddAction']);
+    Route::post('add', [TrainerController::class, 'TrainerAddAction'])->name('trainer.addAction');
     Route::get('edit/{id}',[TrainerController::class, 'Edit'])->name('trainer.edit');
     Route::post('edit/{id}',[TrainerController::class, 'EditAction']);
-    Route::get('delete/{id}', [TrainerController::class, 'Delete']);
-    Route::get('{id}/pokemon', [TrainerController::class, 'TrainerAddPokemon'])->name('trainer.pokeAdd');
-    Route::post('{id}/pokemon', [TrainerController::class, 'TrainerAddPokemonAction']);
-    
+    Route::get('delete/{id}', [TrainerController::class, 'Delete'])->name('trainer.delete');
+    Route::get('pokemon/{id}', [TrainerController::class, 'TrainerListPokemon'])->name('trainer.TrainerListPoke');
+    Route::get('pokemon/add/{id}', [PokemonController::class, 'TrainerAddPokemon'])->name('poke.Add');
+    Route::post('pokemon/add/{id}', [PokemonController::class, 'TrainerAddPokemonAction'])->name('poke.AddAction');
 });
 

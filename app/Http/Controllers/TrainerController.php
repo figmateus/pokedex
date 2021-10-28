@@ -18,8 +18,11 @@ class TrainerController extends Controller
         ]);
     }
     
-    public function Add(){
+    public function Add(Request $request){
+        $data = $request->query();
+        
         return view('admin.add');
+        
     }
 
     public function TrainerAddAction(){
@@ -43,29 +46,21 @@ class TrainerController extends Controller
        
     }
 
-   
-
-    public function Delete(){
-
+    public function Delete($id){
+        $trainer = Trainer::find($id);
+        $trainer->delete();
+        return redirect()->route('trainer.list');
     }
 
-    public function TrainerAddPokemon($id){
+    public function TrainerListPokemon($id){
+        
         $trainer = Trainer::find($id);
         if($trainer) {
             return view('admin.pokelist',[
-                'trainer'  => $trainer
+                'trainer' => $trainer
             ]);
-        }else {
+        } else {
             return redirect()->route('trainer.list');
         }
     }
-
-    public function TrainerAddPokemonAction(){
-        
-    }
-
-    public function TrainerDeletePokemon(){
-        
-    }
-
 }
