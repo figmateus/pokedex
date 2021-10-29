@@ -4,19 +4,19 @@
 @section('title-page', 'Adicionar Treinadores')
 @section('content')
     <div id="form-cont" class="container">
-        <form id="Form" method="GET">
+        <form id="Form" action="{{route('trainer.addAction')}}" method="POST">
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="name">
+                <input type="text" name="name" class="form-control" id="name">
             </div>
             <div id="age" class="mb-3">
                 <label for="age" class="form-label">Idade</label>
-                <input type="number" class="form-control" id="age">
+                <input type="number" name="age" class="form-control" id="age">
             </div>
             <div class="mb-3">
                 <label for="regiao" class="form-label">Região</label><br/>
-                <select id="regiao" class="form-select">
+                <select id="regiao" name="region" class="form-select">
                     <option selected></option>
                     <option value="Jhoto">Jhoto</option>
                     <option value="Hoenn">Hoenn</option>
@@ -25,7 +25,7 @@
                 </select>
                 
             </div>
-              <button type="submit" class="btn btn-primary">Enviar</button>
+              <button type="submit" class="btn btn-primary">Adicionar</button>
         </form>
         
     </div>

@@ -8,15 +8,15 @@
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="name" aria-describedby="name" value="{{$trainer->name}}">
+                <input type="text" name="name" class="form-control" id="name" aria-describedby="name" value="{{$trainer->name}}">
             </div>
             <div id="age" class="mb-3">
                 <label for="age" class="form-label">Idade</label>
-                <input type="number" class="form-control" id="age" value="{{$trainer->age}}">
+                <input type="number" name="age" class="form-control" id="age" value="{{$trainer->age}}">
             </div>
             <div class="mb-3">
                 <label for="regiao" class="form-label">Região</label><br/>
-                <select id="regiao" class="form-select" aria-label="region">
+                <select id="regiao" name="region" class="form-select" aria-label="region">
                     <option selected>{{$trainer->region}}</option>
                     <option value="Jhoto">Jhoto</option>
                     <option value="Hoenn">Hoenn</option>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pokemon;
 use App\Models\Trainer;
+use Illuminate\Support\Facades\DB;
 
 class TrainerController extends Controller
 {
@@ -18,15 +19,29 @@ class TrainerController extends Controller
         ]);
     }
     
-    public function Add(Request $request){
-        $data = $request->query();
+    public function Add(){
+        
         
         return view('admin.add');
-        
+       
     }
 
-    public function TrainerAddAction(){
+    public function TrainerAddAction(Request $request){
+        $request->validate([
+            'name'   => ['required','string'],
+            'age'    => ['required', 'int']
+        ]);
 
+        $name = $request->input('name');
+        $age = $request->input('age');
+        $region = $request->input('region');
+        $trainer = new Trainer;
+        $trainer->name = $name;
+        $trainer->age = $age;
+        $trainer->region = $region;
+        $trainer->save();
+        return redirect()->route('trainer.list');
+        
     }
 
     public function Edit($id){
@@ -42,8 +57,24 @@ class TrainerController extends Controller
         
     }
 
-    public function EditAction(){
+    public function EditAction(Request $request, $id){
+        $request->validate([
+            'name'   => ['required','string'],
+            'age'    => ['required', 'int']
+        ]);
        
+        $name = $request->input('name');
+       $age = $request->input('age');
+       $region = $request->input('region');
+
+       $t = Trainer::find($id);
+       $t->name = $name;
+       $t->age = $age;
+       $t->region = $region;
+       $t->save();
+
+       return redirect()->route('trainer.list');
+
     }
 
     public function Delete($id){
