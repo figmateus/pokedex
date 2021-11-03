@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Trainer;
 use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\PokemonController;
+use App\Services\PokeApiRequestService;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,7 +21,14 @@ Route::get('/', function () {
     return view('trainer');
 });
 
-Route::get('/Api',[PokemonController::class, 'service']);
+Route::get('/Api',function(){
+    
+    $pokeApi = new PokeApiRequestService();
+    $poke = $pokeApi->getPokemon('pikachu');
+
+    
+    print_r($poke["name"]);
+});
 
 Route::prefix('/trainer')->group(function(){
     Route::get('/',[TrainerController::class, 'List'])->name('trainer.list');

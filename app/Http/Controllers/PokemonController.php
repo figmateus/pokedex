@@ -6,11 +6,12 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use App\Models\Pokemon;
 use App\Models\Trainer;
-
+use App\Services\BaseRequestService;
 
 class PokemonController extends Controller
 {
-    public function service() {
+    
+    public function printPoke() {
         $pokeName = 'pikachu';
         $response = Http::get("https://pokeapi.co/api/v2/pokemon/{$pokeName}",[
             'verify' => false,
@@ -25,13 +26,11 @@ class PokemonController extends Controller
 
     public function TrainerAddPokemon(Request $request, $id){
        
-        $pokeName = $request->input('pokeSearch');
-        print_r($pokeName);
+        $pokeName = $request->input('pokeAdd');
         $trainer = Trainer::find($id);
         
         if($trainer) {
             
-            print_r($pokeName);
             return view('admin.addPoke',[
                 'trainer'  => $trainer
             ]);
@@ -44,7 +43,7 @@ class PokemonController extends Controller
     }
 
     public function TrainerAddPokemonAction(Request $request){
-        $data = $request->input('pokeSearch');
+        $data = $request->input('pokeAdd');
         print_r("funcionou!");
         print_r($data);
     }

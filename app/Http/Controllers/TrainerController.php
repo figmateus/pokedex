@@ -13,7 +13,6 @@ class TrainerController extends Controller
     public function List(){
 
         $list = Trainer::all();
-
         return view('admin.list',[
             'list' => $list
         ]);
@@ -23,7 +22,6 @@ class TrainerController extends Controller
         
         
         return view('admin.add');
-       
     }
 
     public function TrainerAddAction(Request $request){
@@ -41,7 +39,6 @@ class TrainerController extends Controller
         $trainer->region = $region;
         $trainer->save();
         return redirect()->route('trainer.list');
-        
     }
 
     public function Edit($id){
@@ -54,7 +51,6 @@ class TrainerController extends Controller
         }else {
             return redirect()->route('trainer.list');
         }
-        
     }
 
     public function EditAction(Request $request, $id){

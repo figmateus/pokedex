@@ -3,11 +3,11 @@
 @section('title-page', 'Adicionar pokemon')
 @section('content')
     <div id="form-cont" class="container">
-        <form id="Form" method="GET" action="{{route('poke.AddAction',['id' => $trainer->id])}}">
+        <form id="Form" method="GET">
             @csrf
             <div class="mb-3">
-                <label for="pokeSearch" class="form-label">Digite o nome do Pokemon</label>
-                <input type="text" class="form-control" id="pokeSearch">
+                <label for="pokeAdd" class="form-label">Digite o nome do Pokemon</label>
+                <input type="text" name="pokeAdd" class="form-control" id="pokeSearch">
             </div>
             <button type="submit" class="btn btn-primary">Adicionar</button>
         </form>
