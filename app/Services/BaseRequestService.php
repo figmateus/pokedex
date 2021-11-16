@@ -10,7 +10,8 @@ class BaseRequestService {
     
     protected function get($poke) 
     {
-        return $this->getUri($poke)->json();
+       $response = $this->getUri($poke);
+        return json_decode($response->getBody());
     }
 
     private function getUri($poke) 

@@ -8,8 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Trainer extends Model
 {
     use HasFactory;
+    protected $table = 'trainers';
+    protected $fillable = ['name'];
 
+
+    
     public function pokemons() {
-        return $this->belongsToMany(Pokemon::class);
+        return $this->belongsToMany(Pokemon::class, 'trainer_pokemon', 'trainer_id', 'pokemon_id');
     }
 }

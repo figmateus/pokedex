@@ -3,7 +3,7 @@
 @section('title-page', 'Adicionar pokemon')
 @section('content')
     <div id="form-cont" class="container">
-        <form id="Form" method="GET">
+        <form id="Form" method="POST">
             @csrf
             <div class="mb-3">
                 <label for="pokeAdd" class="form-label">Digite o nome do Pokemon</label>

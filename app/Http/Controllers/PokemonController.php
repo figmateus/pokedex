@@ -3,30 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Pokemon;
 use App\Models\Trainer;
-use App\Services\BaseRequestService;
+use App\Services\PokeApiRequestService;
 
 class PokemonController extends Controller
 {
     
-    public function printPoke() {
-        $pokeName = 'pikachu';
-        $response = Http::get("https://pokeapi.co/api/v2/pokemon/{$pokeName}",[
-            'verify' => false,
-        ]);
-        $responseBody = json_decode($response->getBody(), false); 
-        
-
-        print_r($responseBody->name);
-        print_r($responseBody->types['0']->type->name);
-        dd($responseBody->sprites->front_default);  
-    }
-
-    public function TrainerAddPokemon(Request $request, $id){
+    public function TrainerAddPokemon($id){
        
-        $pokeName = $request->input('pokeAdd');
         $trainer = Trainer::find($id);
         
         if($trainer) {
@@ -34,18 +21,29 @@ class PokemonController extends Controller
             return view('admin.addPoke',[
                 'trainer'  => $trainer
             ]);
-            
-            
-            
         }else {
             return redirect()->route('trainer.list');
         }
     }
 
-    public function TrainerAddPokemonAction(Request $request){
-        $data = $request->input('pokeAdd');
-        print_r("funcionou!");
-        print_r($data);
+    public function TrainerAddPokemonAction(Request $request, $id)
+    {
+     
+        $route = $request->headers->get('referer');
+        $trainer = Trainer::find($id);
+        $input = $request->input('pokeAdd');
+        $pokeApi = new PokeApiRequestService();
+        $poke = $pokeApi->getPokemon($input);
+        if($poke){
+            $pokemon = Pokemon::firstOrCreate([
+                'name' => "{$poke->name}",
+                'type' => "{$poke->types['0']->type->name}",
+                'image_url' => "{$poke->sprites->front_default}"
+            ]);
+            $trainer->pokemons()->attach($pokemon);
+            $trainer->push();
+            return redirect($route);
+        }    
     }
 
     public function TrainerDeletePokemon(){

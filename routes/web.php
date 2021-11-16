@@ -18,16 +18,24 @@ use App\Services\PokeApiRequestService;
 */
 
 Route::get('/', function () {
-    return view('trainer');
+  $trainer = Trainer::find(2);
+  if($trainer){
+      echo "Treinador: {$trainer->name}<br>";
+      echo "Pokemon: {}";
+  }
+   $pokemon = App\Models\Pokemon::find(2);
+   dd($pokemon);
+    $trainer->pokemons()->attach($pokemon);
+
 });
 
 Route::get('/Api',function(){
     
     $pokeApi = new PokeApiRequestService();
     $poke = $pokeApi->getPokemon('pikachu');
-
+    dd($poke);
     
-    print_r($poke["name"]);
+    
 });
 
 Route::prefix('/trainer')->group(function(){

@@ -9,7 +9,11 @@ class Pokemon extends Model
 {
     use HasFactory;
 
+    protected $table = 'pokemon';
+    protected $fillable = ['name', 'type', 'image_url'];
+    
+    
     public function trainers() {
-        return $this->belongsToMany(trainer::class);
+        return $this->belongsToMany(Trainer::class, 'trainer_pokemon', 'pokemon_id', 'trainer_id'); 
     }
 }

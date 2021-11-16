@@ -13,11 +13,14 @@ class CreateTrainerPokemon extends Migration
      */
     public function up()
     {
-        Schema::create('trainer_pokemons', function (Blueprint $table) {
+        Schema::create('trainer_pokemon', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('trainer_id');
-            $table->unsignedBigInteger('pokemon_id');
+            $table->foreignId('trainer_id');
+            $table->foreignId('pokemon_id');
             $table->timestamps();
+
+            $table->foreign('trainer_id')->references('id')->on('Trainers');
+            $table->foreign('pokemon_id')->references('id')->on('pokemon');
         });
     }
 
@@ -28,6 +31,6 @@ class CreateTrainerPokemon extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trainer_pokemons');
+        Schema::dropIfExists('trainer_pokemon');
     }
 }

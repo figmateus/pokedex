@@ -82,9 +82,13 @@ class TrainerController extends Controller
     public function TrainerListPokemon($id){
         
         $trainer = Trainer::find($id);
+        
         if($trainer) {
+            $pokemon = $trainer->pokemons()->get();
+            
             return view('admin.pokelist',[
-                'trainer' => $trainer
+                'trainer' => $trainer,
+                'pokemon' => $pokemon
             ]);
         } else {
             return redirect()->route('trainer.list');
