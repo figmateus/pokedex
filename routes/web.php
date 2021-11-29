@@ -18,35 +18,30 @@ use App\Services\PokeApiRequestService;
 */
 
 Route::get('/', function () {
-  $trainer = Trainer::find(2);
-  if($trainer){
-      echo "Treinador: {$trainer->name}<br>";
-      echo "Pokemon: {}";
-  }
-   $pokemon = App\Models\Pokemon::find(2);
-   dd($pokemon);
-    $trainer->pokemons()->attach($pokemon);
-
+    return redirect(route('trainer.list'));
 });
 
-Route::get('/Api',function(){
-    
+Route::get('/test', function() {
+    dd(\App\Models\Pokemon::find(5)->toArray());
+});
+
+Route::get('/Api', function () {
+
     $pokeApi = new PokeApiRequestService();
     $poke = $pokeApi->getPokemon('pikachu');
     dd($poke);
-    
-    
 });
 
-Route::prefix('/trainer')->group(function(){
-    Route::get('/',[TrainerController::class, 'List'])->name('trainer.list');
+Route::prefix('/trainer')->group(function () {
+    Route::get('/', [TrainerController::class, 'List'])->name('trainer.list');
     Route::get('add', [TrainerController::class, 'Add'])->name('trainer.add');
     Route::post('add', [TrainerController::class, 'TrainerAddAction'])->name('trainer.addAction');
-    Route::get('edit/{id}',[TrainerController::class, 'Edit'])->name('trainer.edit');
-    Route::post('edit/{id}',[TrainerController::class, 'EditAction']);
+    Route::get('edit/{id}', [TrainerController::class, 'Edit'])->name('trainer.edit');
+    Route::post('edit/{id}', [TrainerController::class, 'EditAction']);
     Route::get('delete/{id}', [TrainerController::class, 'Delete'])->name('trainer.delete');
     Route::get('pokemon/{id}', [TrainerController::class, 'TrainerListPokemon'])->name('trainer.TrainerListPoke');
     Route::get('pokemon/add/{id}', [PokemonController::class, 'TrainerAddPokemon'])->name('poke.Add');
     Route::post('pokemon/add/{id}', [PokemonController::class, 'TrainerAddPokemonAction'])->name('poke.AddAction');
+    Route::get('{id}/pokemon/delete/{pokeId}', [PokemonController::class, 'TrainerDeletePokemon'])->name('poke.delete');
+    Route::post('{id}/pokemon/delete/{pokeId}', [PokemonController::class, 'TrainerDeletePokemon'])->name('poke.delete');
 });
-

@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div id="cardItens" class="container-sm d-flex flex-row align-items-start">
-                <div class="container d-flex">
+                <div class="container d-flex justify-content-center">
                     @yield('content')
                 </div>
             </div>

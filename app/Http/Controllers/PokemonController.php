@@ -11,42 +11,54 @@ use App\Services\PokeApiRequestService;
 
 class PokemonController extends Controller
 {
-    
-    public function TrainerAddPokemon($id){
-       
+
+    public function TrainerAddPokemon($id)
+    {
+
         $trainer = Trainer::find($id);
-        
-        if($trainer) {
-            
-            return view('admin.addPoke',[
+
+        if ($trainer) {
+
+            return view('admin.addPoke', [
                 'trainer'  => $trainer
             ]);
-        }else {
+        } else {
             return redirect()->route('trainer.list');
         }
     }
 
     public function TrainerAddPokemonAction(Request $request, $id)
     {
-     
-        $route = $request->headers->get('referer');
+        $request->validate([
+            'pokeAdd' => ['required','alpha']
+        ]);
+
         $trainer = Trainer::find($id);
         $input = $request->input('pokeAdd');
         $pokeApi = new PokeApiRequestService();
         $poke = $pokeApi->getPokemon($input);
-        if($poke){
+        if ($poke) {
             $pokemon = Pokemon::firstOrCreate([
                 'name' => "{$poke->name}",
                 'type' => "{$poke->types['0']->type->name}",
                 'image_url' => "{$poke->sprites->front_default}"
             ]);
-            $trainer->pokemons()->attach($pokemon);
+
+            $trainer->pokemons()->sync($pokemon);
             $trainer->push();
-            return redirect($route);
-        }    
+            return redirect(route('trainer.TrainerListPoke', ['id' => $id]));
+        }
     }
 
-    public function TrainerDeletePokemon(){
+    public function TrainerDeletePokemon($id, $pokeId)
+    {
+        $trainer = Trainer::find($id);
+        $trainer->pokemons()->detach($pokeId);
+        return redirect(route('trainer.TrainerListPoke', ['id' => $id]));
+
         
+       
+
+       
     }
 }

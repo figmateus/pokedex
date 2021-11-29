@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Pokemon;
 use App\Models\Trainer;
-use Illuminate\Support\Facades\DB;
+
 
 class TrainerController extends Controller
 {
@@ -26,17 +25,16 @@ class TrainerController extends Controller
 
     public function TrainerAddAction(Request $request){
         $request->validate([
-            'name'   => ['required','string'],
-            'age'    => ['required', 'int']
+            'name'   => ['required','alpha','string'],
+            'age'    => ['required', 'int'],
+            'region' => ['required', 'string']
         ]);
 
-        $name = $request->input('name');
-        $age = $request->input('age');
-        $region = $request->input('region');
-        $trainer = new Trainer;
-        $trainer->name = $name;
-        $trainer->age = $age;
-        $trainer->region = $region;
+        $trainer = new Trainer([
+            "name"   => $request->input('name'),
+            "age"    => $request->input('age'),
+            "region" => $request->input('region')
+        ]);
         $trainer->save();
         return redirect()->route('trainer.list');
     }
@@ -56,18 +54,15 @@ class TrainerController extends Controller
     public function EditAction(Request $request, $id){
         $request->validate([
             'name'   => ['required','string'],
-            'age'    => ['required', 'int']
+            'age'    => ['required', 'int'],
+            'region' => ['required', 'string']
         ]);
-       
-        $name = $request->input('name');
-       $age = $request->input('age');
-       $region = $request->input('region');
 
-       $t = Trainer::find($id);
-       $t->name = $name;
-       $t->age = $age;
-       $t->region = $region;
-       $t->save();
+        $t = Trainer::find($id);
+        $t->name = $request->input('name');
+        $t->age = $request->input('age');
+        $t->region = $request->input('region');
+        $t->save();
 
        return redirect()->route('trainer.list');
 
@@ -85,6 +80,7 @@ class TrainerController extends Controller
         
         if($trainer) {
             $pokemon = $trainer->pokemons()->get();
+            
             
             return view('admin.pokelist',[
                 'trainer' => $trainer,
