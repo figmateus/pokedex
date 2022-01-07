@@ -2,7 +2,16 @@
 
 ## PokeDex
 
-This is a chanllenger from He4rt Developers to create a pokedex that gonna consume an api from  [PokeApi.co](https://pokeapi.co) and i gonna use The relation (BelongsToMany) and Laravel.
+This is a chanllenger from He4rt Developers to create a pokedex that consume an api from  [PokeApi.co](https://pokeapi.co) and use The relation(BelongsToMany), i use Laravel and bootstrap on this project.
+
+on this project i did: 
+
+* Consume an API
+* Migrations
+* CRUD
+* ORM
+* BOOTSTRAP
+ 
 
 
 
