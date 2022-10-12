@@ -18,18 +18,18 @@
                 <label for="regiao" class="form-label">Região</label><br/>
                 <select id="regiao" name="region" class="form-select">
                     <option selected></option>
-                    <option value="Jhoto">Jhoto</option>
+                    <option value="Johto">Johto</option>
                     <option value="Hoenn">Hoenn</option>
                     <option value="Sinnoh">Sinnoh</option>
                     <option value="Kanto">Kanto</option>
                 </select>
-                
+
             </div>
               <button type="submit" class="btn btn-primary">Adicionar</button>
         </form>
-        
+
     </div>
-    
+
 @endsection
 @section('button')
 <a id="add-button" class="btn btn-primary" href="{{route('trainer.list')}}" role="button">Voltar</a>

@@ -44,7 +44,7 @@ class PokemonController extends Controller
                 'image_url' => "{$poke->sprites->front_default}"
             ]);
 
-            $trainer->pokemons()->sync($pokemon);
+            $trainer->pokemons()->syncwithoutdetaching($pokemon);
             $trainer->push();
             return redirect(route('trainer.TrainerListPoke', ['id' => $id]));
         }

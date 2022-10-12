@@ -17,20 +17,19 @@ use App\Services\PokeApiRequestService;
 |
 */
 
-Route::get('/', function () {
-    return redirect(route('trainer.list'));
-});
+// Route::get('/', function () {
+//    return view('admin.add');
+// });
 
-Route::get('/test', function() {
-    dd(\App\Models\Pokemon::find(5)->toArray());
-});
+// Route::get('/test', function() {
+//     dd(\App\Models\Pokemon::find(5)->toArray());
+// });
 
-Route::get('/Api', function () {
-
-    $pokeApi = new PokeApiRequestService();
-    $poke = $pokeApi->getPokemon('pikachu');
-    dd($poke);
-});
+// Route::get('/Api', function () {
+//     $pokeApi = new PokeApiRequestService();
+//     $poke = $pokeApi->getPokemon('pikachu');
+//     dd($poke);
+// });
 
 Route::prefix('/trainer')->group(function () {
     Route::get('/', [TrainerController::class, 'List'])->name('trainer.list');
@@ -43,5 +42,5 @@ Route::prefix('/trainer')->group(function () {
     Route::get('pokemon/add/{id}', [PokemonController::class, 'TrainerAddPokemon'])->name('poke.Add');
     Route::post('pokemon/add/{id}', [PokemonController::class, 'TrainerAddPokemonAction'])->name('poke.AddAction');
     Route::get('{id}/pokemon/delete/{pokeId}', [PokemonController::class, 'TrainerDeletePokemon'])->name('poke.delete');
-    Route::post('{id}/pokemon/delete/{pokeId}', [PokemonController::class, 'TrainerDeletePokemon'])->name('poke.delete');
+    // Route::post('{id}/pokemon/delete/{pokeId}', [PokemonController::class, 'TrainerDeletePokemon'])->name('poke.delete');
 });

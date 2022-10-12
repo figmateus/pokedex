@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\TrainerRepository;
 use Illuminate\Http\Request;
 use App\Models\Trainer;
-
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\AddTrainerValidation;
 
 class TrainerController extends Controller
 {
-    
+
+    public function __construct(TrainerRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
+
     public function List(){
 
         $list = Trainer::all();
@@ -16,26 +24,19 @@ class TrainerController extends Controller
             'list' => $list
         ]);
     }
-    
+
     public function Add(){
-        
-        
+
+
         return view('admin.add');
     }
 
-    public function TrainerAddAction(Request $request){
-        $request->validate([
-            'name'   => ['required','alpha','string'],
-            'age'    => ['required', 'int'],
-            'region' => ['required', 'string']
-        ]);
+    public function TrainerAddAction(AddTrainerValidation $request){
 
-        $trainer = new Trainer([
-            "name"   => $request->input('name'),
-            "age"    => $request->input('age'),
-            "region" => $request->input('region')
-        ]);
-        $trainer->save();
+        $trainer = $request->validated();
+
+        $this->repository->create($trainer);
+
         return redirect()->route('trainer.list');
     }
 
@@ -75,19 +76,20 @@ class TrainerController extends Controller
     }
 
     public function TrainerListPokemon($id){
-        
+
         $trainer = Trainer::find($id);
-        
-        if($trainer) {
-            $pokemon = $trainer->pokemons()->get();
-            
-            
+
+            $pokemon = DB::table('trainer_pokemon')
+            ->join('pokemon','pokemon.id','trainer_pokemon.pokemon_id')
+            ->select('pokemon.*')
+            ->where('trainer_pokemon.trainer_id', '=', $id)
+            ->get();
+
+
             return view('admin.pokelist',[
                 'trainer' => $trainer,
                 'pokemon' => $pokemon
             ]);
-        } else {
-            return redirect()->route('trainer.list');
-        }
+
     }
 }
